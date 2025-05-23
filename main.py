@@ -36,7 +36,6 @@ class ToDoList:
         for key, value in self.tasks.items():
             print(f'{number}. {key} | статус: {value}')
             number += 1
-
         print()
 
 MENU = {
