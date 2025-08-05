@@ -3,19 +3,17 @@ class BankAccount:
         self.__balance = initial_balance
 
 
-    def deposit(self, amount):
-        try:
-            amount = int(amount)
+    def deposit(self):
+            amount = self.get_number()
+
             if amount > 0:
                 self.__balance += amount
             else:
                 print('Не верное значение!')
-        except ValueError:
-            print('Не верное значение!')
 
-    def withdraw(self, amount):
+    def withdraw(self):
         try:
-            amount = int(amount)
+            amount = self.get_number()
 
             if 0 < amount <= self.__balance:
                 self.__balance -= amount
@@ -26,36 +24,33 @@ class BankAccount:
             print('Не верное значение!')
 
     def get_balance(self):
-        return self.__balance
+        print(f'{self.__balance} Рублей на счету')
 
+    def get_number(self):
+        try:
+            number = int(input('Введите сумму: '))
+            return number
+        except ValueError:
+            print('Не верное значение!')
 
 def main():
+    my_program = True
     my_account = BankAccount(100)
 
     MENU = {
-        '1.': 'Пополнить депозит',
-        '2.': 'Снять депозит',
-        '3.': 'Посмотреть баланс',
-        '0.': 'Выход'
+        '1': ('Пополнить депозит', my_account.deposit),
+        '2': ('Снять депозит', my_account.withdraw),
+        '3': ('Посмотреть баланс', my_account.get_balance),
     }
 
-    while True:
-        for key, value in MENU.items():
-            print(f'{key} {value}')
+    while my_program:
+        for key, (description, _) in MENU.items():
+            print(f'{key}. {description}')
 
         user_input = input('\nВведите номер для управления меню: ')
 
-        if user_input == "1":
-            amount = input('Введите сумму пополнения: ')
-            my_account.deposit(amount)
-        elif user_input == "2":
-            amount = input('Введите сумму снятия: ')
-            my_account.withdraw(amount)
-        elif user_input == "3":
-            print(f'На вашем депозите: {my_account.get_balance()}')
-        elif user_input == "0":
-            break
-        else:
-            print('Такого пункта меню нет.')
+        if user_input in MENU and not 0:
+            _, action =  MENU[user_input]
+            action()
 
 main()
