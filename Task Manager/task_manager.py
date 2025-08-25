@@ -3,14 +3,14 @@ import json
 
 class TaskManager:
     def __init__(self):
-        self.tasks = [['Первая задача', False], ['Вторая задача', False]]
+        self.tasks = [{"описание": "Первая задача", "статус": False}, {"описание": "Вторая задача", "статус": False}]
 
     def add_task(self, description: str):
-        self.tasks.append([description, False])
+        self.tasks.append({"описание": description, "статус": False})
 
     def complete_task(self, index: int):
         if self.tasks[index]:
-            self.tasks[index][1] = True
+            self.tasks[index]['статус'] = True
 
             print(self.tasks)
 
@@ -24,8 +24,3 @@ class TaskManager:
     def load_from_json(self, filename: str):
         with open('self.tasks.json', 'r') as filename:
             self.tasks = json.load(filename)
-
-
-test = TaskManager()
-
-test.complete_task(1)
