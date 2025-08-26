@@ -1,6 +1,5 @@
 import json
 
-
 class TaskManager:
     def __init__(self):
         self.tasks = [{"описание": "Первая задача", "статус": False}, {"описание": "Вторая задача", "статус": False}]
@@ -12,8 +11,6 @@ class TaskManager:
         if self.tasks[index]:
             self.tasks[index]['статус'] = True
 
-            print(self.tasks)
-
     def remove_task(self, index: int):
         self.tasks.pop(index)
 
@@ -24,3 +21,14 @@ class TaskManager:
     def load_from_json(self, filename: str):
         with open('self.tasks.json', 'r') as filename:
             self.tasks = json.load(filename)
+
+    def view_list(self):
+        i = 1
+
+        for item in self.tasks:
+            print(f'{i}.{item['описание']} - Статус: {item['статус']}')
+
+            i += 1
+
+    def get_list_tasks(self):
+        return self.tasks()
