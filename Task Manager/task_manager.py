@@ -2,17 +2,26 @@ import json
 
 class TaskManager:
     def __init__(self):
-        self.tasks = [{"описание": "Первая задача", "статус": False}, {"описание": "Вторая задача", "статус": False}]
+        self.tasks = [
+            {"описание": "Первая задача", "статус": False},
+            {"описание": "Вторая задача", "статус": False}
+        ]
 
     def add_task(self, description: str):
         self.tasks.append({"описание": description, "статус": False})
 
     def complete_task(self, index: int):
-        if self.tasks[index]:
-            self.tasks[index]['статус'] = True
+        if index <= len(self.tasks):
+            if self.tasks[index]:
+                self.tasks[index]['статус'] = True
+        else:
+            print('такого в индекса нет')
 
     def remove_task(self, index: int):
-        self.tasks.pop(index)
+        if index <= len(self.tasks):
+            self.tasks.pop(index)
+        else:
+            print('такого в индекса нет')
 
     def save_to_json(self, filename: str):
         with open('self.tasks.json', 'w') as filename:
@@ -23,12 +32,5 @@ class TaskManager:
             self.tasks = json.load(filename)
 
     def view_list(self):
-        i = 1
-
-        for item in self.tasks:
-            print(f'{i}.{item['описание']} - Статус: {item['статус']}')
-
-            i += 1
-
-    def get_list_tasks(self):
-        return self.tasks()
+        for index, item in enumerate(self.tasks):
+            print(f'{index}.{item['описание']} - Статус: {item['статус']}')

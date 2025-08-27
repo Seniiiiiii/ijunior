@@ -26,6 +26,6 @@ class PyTest:
 
 test = PyTest()
 
-# test.test_1()
-# test.test_2()
+test.test_1()
+test.test_2()
 test.test_3()
