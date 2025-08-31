@@ -12,8 +12,7 @@ class TaskManager:
 
     def complete_task(self, index: int):
         if 0 <= index <= len(self.tasks):
-            if self.tasks[index]:
-                self.tasks[index]['status'] = True
+            self.tasks[index]['status'] = True
         else:
             print('такого в индекса нет')
 
@@ -24,14 +23,12 @@ class TaskManager:
             print('такого в индекса нет')
 
     def save_to_json(self, file: str):
-        my_json = 'self.tasks.json'
-        with open(my_json, 'w') as file:
-            json.dump(self.tasks, file, indent=4)
+        with open(file, 'w') as my_file:
+            json.dump(self.tasks, my_file, indent=4)
 
     def load_from_json(self, file: str):
-        my_json = 'self.tasks.json'
-        with open(my_json, 'r') as file:
-            self.tasks = json.load(file)
+        with open(file, 'r') as my_file:
+            self.tasks = json.load(my_file)
 
     def view_list(self):
         for index, item in enumerate(self.tasks):
